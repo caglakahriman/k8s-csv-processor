@@ -4,7 +4,7 @@ generate "provider" {
   contents  = <<EOF
 provider "aws" {
   region  = "us-east-1"
-  profile = "playground"
+  profile = "playground-test"
 }
 EOF
 }
@@ -19,6 +19,6 @@ remote_state {
     bucket  = "playground-test-terragrunt-state"
     key     = "test/${path_relative_to_include()}/terraform.tfstate"
     region  = "us-east-1"
-    profile = "playground"
+    profile = "playground-test"
   }
 }
