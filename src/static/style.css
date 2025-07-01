@@ -1,0 +1,80 @@
+* {
+  margin:1.5%;
+}
+
+body{
+  background-color: #F3EEEA;
+  color: #4e3a19;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2{
+  margin: 5%;
+}
+
+#upload{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+#csv-submission{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  border-style: solid;
+  border-color: #4e3a19;
+  border-radius: 20px;
+}
+
+#history{
+  color: #4e3a19;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  flex-direction:row;
+  box-sizing: border-box;
+  width: 50%;
+  height: 100%;
+}
+
+#process{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#history-list{
+  border-style:solid;
+  border-radius: 20px;
+  box-sizing: border-box;
+  width: 75%;
+  height: 100%;
+  padding-bottom: 2%;
+}
+
+ul{
+  color: #4e3a19;
+}
+
+#btn-upload{
+  font-weight:bold;
+  background-color: #B0A695;
+  border-style:none;
+  padding:15px;
+  color:#4e3a19;
+  border-radius:20px;
+  width:150px;
+}
+
+#btn-upload:hover{
+  cursor:pointer;
+  background-color: #4e3a19;
+  color:#EBE3D5;
+}

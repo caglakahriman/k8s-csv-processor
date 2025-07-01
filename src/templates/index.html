@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./static/style.css">
+  <script src="./static/index.js"></script>
+  <title>Ounass Case Study</title>
+</head>
+  <body>
+    <div id="upload">
+      <h1>Ounass Case Study</h1>
+        <div>
+          <form id="csv-submission" method=post enctype=multipart/form-data>
+            <input type=file name=file>
+            <input type=submit value="Upload CSV" id="btn-upload">
+          </form>
+        </div>
+      <div id="history">
+          <section id="history-list">
+            <h2>File History</h2>
+            <ul>
+              {% for f in files %}
+                <li>{{ f }}</li>
+              {% endfor %}
+            </ul>
+          </section>
+        </div>
+    </div>
+    <hr/>
+    <div id="process">
+      <div>
+        {% if rows %}
+          <h2>CSV Content:</h2>
+          <table border="1">
+            {% for row in rows %}
+              <tr>{% for col in row %}<td>{{ col }}</td>{% endfor %}</tr>
+            {% endfor %}
+          </table>
+          {% endif %}
+        </div>
+    </div>
+  </body>
+</html>
