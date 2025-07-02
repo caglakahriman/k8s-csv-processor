@@ -1,0 +1,10 @@
+{{- if .Values.configmap.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "csv-processor.fullname" . }}
+  labels:
+    {{- include "csv-processor.labels" . | nindent 4 }}
+data:
+  {{- toYaml .Values.configmap.data | nindent 2 }}
+{{- end -}}

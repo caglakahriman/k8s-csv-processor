@@ -1,0 +1,46 @@
+replicaCount: 1
+
+image:
+  flask: caglakahriman/flask-app:latest
+
+service:
+  type: ClusterIP
+  targetPort: 5001
+  port: 80
+  protocol: TCP
+  name: http
+
+serviceAccount:
+  create: true
+  name: csv-processor-sa
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::687103267257:role/playground-test-processed-files-s3-role
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+app:
+  healthEndpoint: "/health"
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 70
+
+configmap:
+  enabled: true
+  data:
+    FLASK_ENV: production
+
+volume:
+  mountPath: /shared
+  claimName: shared-storage-pvc
+
+secret:
+  enabled: false
