@@ -28,9 +28,10 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: . --platform linux/amd64,linux/arm64
           push: true
           tags: ${{ env.IMAGE_NAME }}:latest
+          platforms: linux/amd64,linux/arm64
 
   deploy:
     needs: build-and-push
@@ -60,7 +61,7 @@ jobs:
         uses: azure/setup-helm@v4
         with:
           version: 'latest'
-          
+
       - name: Deploy Helm chart
         run: |
           helm upgrade --install csv-processor ./helm-chart/csv-processor \
