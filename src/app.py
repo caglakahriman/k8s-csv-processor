@@ -5,8 +5,14 @@ from werkzeug.utils import secure_filename
 
 ALLOWED_EXTENSIONS = {'csv'}
 
-s3 = boto3.resource('s3')
+# Auth with your local aws credentials file
+session = boto3.Session(profile_name='playground-test')
+s3 = session.resource('s3')
 bucket = s3.Bucket('playground-test-processed-files')
+
+# Auth with OIDC
+#s3 = boto3.resource('s3')
+#bucket = s3.Bucket('playground-test-processed-files')
 
 app = Flask(__name__, static_url_path='/static')
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1000 * 1000 # 10mb
@@ -43,3 +49,8 @@ def upload_file():
     return render_template("index.html", files=processed_files)
   
   return render_template("index.html")
+ 
+#for probes
+@app.route("/health", methods=['GET'])
+def health():
+    return "ok", 200
