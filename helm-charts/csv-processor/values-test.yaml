@@ -2,6 +2,7 @@ replicaCount: 1
 
 image:
   flask: caglakahriman/flask-app:latest
+  nginx: nginx:latest
 
 service:
   type: ClusterIP

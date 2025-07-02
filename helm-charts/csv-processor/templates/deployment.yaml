@@ -68,10 +68,28 @@ spec:
           volumeMounts:
             - name: shared-volume
               mountPath: {{ .Values.volume.mountPath }}
-
+        - name: nginx
+          image: {{ .Values.image.nginx }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: shared-volume
+              mountPath: /usr/share/nginx/html/static 
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d
+              readOnly: true
+          
       volumes:
         - name: shared-volume
           emptyDir: {}
+        - name: nginx-config
+          configMap:
+            name: {{ include "csv-processor.fullname" . }}-nginx-config
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
