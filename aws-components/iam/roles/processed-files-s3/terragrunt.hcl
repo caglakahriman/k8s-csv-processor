@@ -19,7 +19,7 @@ inputs = {
   provider_urls     = [dependency.eks.outputs.cluster_oidc_issuer_url]
   role_policy_arns  = [dependency.policy.outputs.arn]
 
-  oidc_fully_qualified_subjects  = ["system:serviceaccount:default:flask-app-sa"]
+  oidc_fully_qualified_subjects  = ["system:serviceaccount:default:csv-processor-sa"]
   oidc_fully_qualified_audiences = ["sts.amazonaws.com"]
 
   tags = local.common_vars.tags
