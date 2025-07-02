@@ -6,13 +6,12 @@ from werkzeug.utils import secure_filename
 ALLOWED_EXTENSIONS = {'csv'}
 
 # Auth with your local aws credentials file
-session = boto3.Session(profile_name='playground-test')
-s3 = session.resource('s3')
-bucket = s3.Bucket('playground-test-processed-files')
-
-# Auth with OIDC
-#s3 = boto3.resource('s3')
+#session = boto3.Session(profile_name='playground-test')
+#s3 = session.resource('s3')
 #bucket = s3.Bucket('playground-test-processed-files')
+
+s3 = boto3.resource('s3')
+bucket = s3.Bucket('playground-test-processed-files')
 
 app = Flask(__name__, static_url_path='/static')
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1000 * 1000 # 10mb
