@@ -8,7 +8,6 @@ ALLOWED_EXTENSIONS = {'csv'}
 # Auth with your local aws credentials file
 #session = boto3.Session(profile_name='playground-test')
 #s3 = session.resource('s3')
-#bucket = s3.Bucket('playground-test-processed-files')
 
 s3 = boto3.resource('s3')
 bucket = s3.Bucket('playground-test-processed-files')
@@ -44,10 +43,11 @@ def upload_file():
       bucket.upload_fileobj(uploaded_file, filename)
       processed_files = [obj.key for obj in bucket.objects.all()]
       return render_template("index.html", rows=parsed_rows, files=processed_files)
-    
-    return render_template("index.html", files=processed_files)
-  
+    else:
+      return render_template("index.html", files=processed_files)
   return render_template("index.html")
+    
+  
  
 #for probes
 @app.route("/health", methods=['GET'])
