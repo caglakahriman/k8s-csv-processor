@@ -31,6 +31,19 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           {{- if .Values.configmap.enabled }}
+          env:
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                name: aws-credentials
+                key: aws-access-key-id
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: aws-credentials
+                key: aws-secret-access-key
+          - name: AWS_DEFAULT_REGION
+            value: "us-east-1"
           envFrom:
             - configMapRef:
                 name: {{ include "csv-processor.fullname" . }}
@@ -59,7 +72,6 @@ spec:
       volumes:
         - name: shared-volume
           emptyDir: {}
-
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
