@@ -47,9 +47,6 @@ def upload_file():
       return render_template("index.html", files=processed_files)
   return render_template("index.html")
     
-  
- 
-#for probes
 @app.route("/health", methods=['GET'])
 def health():
     return "ok", 200
